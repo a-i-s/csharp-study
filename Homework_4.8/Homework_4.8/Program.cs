@@ -10,7 +10,7 @@ namespace Homework_4._8
     class Program
     {
         static void Main(string[] args)
-       {
+        {
             int[] incomeArray = { 100000, 120000, 180000, 70000, 100000, 200000, 130000, 150000, 190000, 110000, 150000, 100000 };
             int[] expenseArray = { 80000, 90000, 70000, 70000, 80000, 120000, 140000, 65000, 90000, 70000, 120000, 80000 };
 
@@ -35,41 +35,30 @@ namespace Homework_4._8
             int[] minProfitArray = new int[3];
             for (int j = 0; j < 3; j++)
             {
-               
                 int min = profitArray[0]; // находим минимальное значение прибыли
-                                             
-                               
+                                 
                 for (int i = 1; i < profitArray.Length; i++)
                 {
-                                                                     
+               
                     int current = profitArray[i]; 
                     if (current < min) {
 
                        bool isFound = false; // найдено ли такое минимальное значение в массиве минимальных значений
-                    
-                   
+                
                        if (j>0) {
                            for (int k = 0; k < j; k++)
                            {
                             if (minProfitArray[k] == current) { // если текущее значение уже есть в 
                                 isFound = true;                 // массиве минимальных значений, мы запоминаем
                                 break;                          // факт, что оно найдено и выходлим
-
                                 }
                             }
-
                         }
-                       
                         if (!isFound) min = current;
                     }
-    
                 }
-
                 minProfitArray[j] = min; 
-                Console.WriteLine($"Худшая прибыль в месяцах: {min} + {j} ");
-         
             }
-
             // далее находим месяцы с минимальной прибылью
             string months = "";
             for (int t = 0; t < minProfitArray.Length; t++)
@@ -81,23 +70,12 @@ namespace Homework_4._8
                     int number2 = profitArray[g]; // запомнили элемент из массива значений прибыли
                     if (number == number2) {
                       months = months + (g+1) + " ";
-                      Console.WriteLine(g+1);
                      }
-                    
                 }
-                                                                                                   
-             Console.WriteLine($"Худшая прибыль в месяцах: {months}");
            }
+            Console.WriteLine($"Худшая прибыль в месяцах: {months}");
         Console.ReadKey();
-         /*int min = profitArray[0];
-            for (int i = 1; i < profitArray.Length; i++)
-            {
-                int current = profitArray[i];
-                if (profitArray[i] < profitArray[0]) min = profitArray[i];
-            }*/
-         
+        }
     }
-
-}
 }
 
