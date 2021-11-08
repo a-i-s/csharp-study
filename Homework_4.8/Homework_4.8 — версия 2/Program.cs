@@ -17,7 +17,7 @@ namespace Homework_4._8
             int[] profitArray = new int[12];
 
             Console.WriteLine($"{"месяц",16}   {"доход,тыс.руб",16}   {"расход,тыс.руб",16}   {"прибыль,тыс.руб.",16}");
-            for (int i = 0; i < 12; i++) // находим прибыль в каждом месяце
+            for (int i = 0; i < 12; i++) // находим прибыль в каждом месяцце
              {
               profitArray[i] = incomeArray[i] - expenseArray[i];
               Console.WriteLine($"{i+1,16}   {incomeArray[i],16}   {expenseArray[i],16}   {profitArray[i],16}");
@@ -32,31 +32,21 @@ namespace Homework_4._8
             Console.WriteLine($"Месяцев с положительной прибылью: {counter}");
             Console.ReadKey();
 
-            int[] minProfitArray = new int[3];
+            int[] minProfitArray = new int[3];// создали новый пустой массив для минимальных профитов
+            Array.Sort(profitArray); // отсортировали профиты (min -> max)
             for (int j = 0; j < 3; j++)
             {
-                int min = profitArray[0]; // находим минимальное значение прибыли
-                                 
-                for (int i = 1; i < profitArray.Length; i++)
-                {
-               
-                    int current = profitArray[i]; 
-                    if (current < min) {
-
-                       bool isFound = false; // найдено ли такое минимальное значение в массиве минимальных значений
-                           for (int k = 0; k < j; k++)
-                           {
-                            if (minProfitArray[k] == current) { // если текущее значение уже есть в 
-                
-                       if (j>0) {
-                                isFound = true;                 // массиве минимальных значений, мы запоминаем
-                                break;                          // факт, что оно найдено и выходлим
-                                }
-                            }
-                        }
-                        if (!isFound) min = current;
+                int min = profitArray[j]; // находим минимальное значение прибыли
+                if (j != 0){
+                    int index = Array.IndexOf(minProfitArray, min);
+                    int k = j+1;
+                    while (index != -1){
+                        min = profitArray[k];
+                        index = Array.IndexOf(minProfitArray, min);
+                        k++;
                     }
-                }
+                }                 
+    
                 minProfitArray[j] = min; 
             }
             // далее находим месяцы с минимальной прибылью
