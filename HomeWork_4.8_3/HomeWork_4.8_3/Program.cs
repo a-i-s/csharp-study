@@ -35,6 +35,11 @@ namespace HomeWork_4._8_3
 
             Console.WriteLine("Сгенерированный массив:");
             Print(matrix);
+            
+            Console.WriteLine("Умноженная матрица при помощи метода:");
+            int[,] compositionMatrix = Composition(matrix, number); // ввели переменную compositionMatrix и положили в нее метод
+            //Composition, который перемножаем основную матрицу на число
+            Print(compositionMatrix); // используем Print для вывода новой перемноженной матрицы
 
             // умножение матрицы на число
             int[,] megamatrix = new int[rows, columns]; //создаем новый масств
@@ -73,6 +78,11 @@ namespace HomeWork_4._8_3
                     matrixAddition[j, i] = matrix[j, i] + matrixTwo[j, i]; //заполняем новый массив
                 }
             }
+            
+            Console.WriteLine("Сложенная матрица при помощи метода:");
+            int[,] additionMatrix = Addition(matrix, matrixTwo); // ввели переменную additionMatrix и положили в нее метод
+            //Addition, который складывает матрицы
+            Print(additionMatrix); // используем Print для вывода новой сложенной матрицы
 
             Console.WriteLine("Новый массив суммы:");
             Print(matrixAddition);
@@ -91,7 +101,7 @@ namespace HomeWork_4._8_3
             Print(matrixDifference);
 
             //умножение матриц
-            int[,] matrix1 = 
+            int[,] matrix1 =
             {
                 { 1, 2, 3 }
             }; //задаем первую матрицу
@@ -101,28 +111,37 @@ namespace HomeWork_4._8_3
                 { 4 },
                 { 5 },
                 { 6 }
-            };//задаем вторую матрицу
-            
+            }; //задаем вторую матрицу
+
             var rowsCount = matrix1.GetLength(0); //вводим переменную количество строк в первом массиве
-            var columnsCount = matrix2.GetLength(1);//вводим переменную количество столбцов во втором массиве
-           
-            int[,] resultMatrix = new int[rowsCount, columnsCount];//создаем третий массив результат 
+            var columnsCount = matrix2.GetLength(1); //вводим переменную количество столбцов во втором массиве
+
+            int[,] resultMatrix = new int[rowsCount, columnsCount]; //создаем третий массив результат 
             for (int i = 0; i < rowsCount; i++) //проходится по строкам первого массива
             {
-                for (int j = 0; j < columnsCount; j++)//проходимся по столбцам второго массива
+                for (int j = 0; j < columnsCount; j++) //проходимся по столбцам второго массива
                 {
-                    int sum = 0;//получаем каждый элемент новой матрицы результат
-                    for (int k = 0; k < matrix1.GetLength(1); k++)//для прохождения по всем элементам строки или столбца
+                    int sum = 0; //получаем каждый элемент новой матрицы результат
+                    for (int k = 0; k < matrix1.GetLength(1); k++) //для прохождения по всем элементам строки или столбца
                     {
                         sum = (matrix1[i, k] * matrix2[k, j]) + sum;
                     }
-                    resultMatrix[i, j] = sum;//записываем новую матрицу из полученных элементов суммы
+                    resultMatrix[i, j] = sum; //записываем новую матрицу из полученных элементов суммы
                 }
             }
+
             Console.WriteLine("Новый массив, полученный при умножении двух матриц:");
-            Print(resultMatrix);//применяем метод для вывода в консоль данных новой матрицы
+            Print(resultMatrix); //применяем метод для вывода в консоль данных новой матрицы
+            
+            
+            Console.WriteLine("Произведение двух матриц при помощи метода:");
+            int[,] compositionTwoMatrix = СompositionTwo(matrix, matrixTwo); // ввели переменную compositionTwoMatrix и положили в нее метод
+            //CompositionTwo, который перемножает две заданные матрицы
+            Print(compositionTwoMatrix); // используем Print для вывода новой перемноженной матрицы
             Console.ReadKey(); //получили заполненный массив
         }
+        
+        
 
         static string GetString(int[] array) //метод для получения строки из массива
         {
@@ -150,5 +169,76 @@ namespace HomeWork_4._8_3
                 Console.WriteLine(result); // печатаем полученную строку
             }
         }
-    }
+
+        //Создаем метод, принимающий матрицу и число, а возвращающий матрицу умноженную на число 
+        static int[,] Composition(int[,] matrix, int number)
+        {
+            var rows = matrix.GetLength(0);
+            var columns = matrix.GetLength(1);
+
+            int[,] result = new int[rows, columns];
+
+            for (int j = 0; j < rows; j++) // проходимся по строкам 
+            {
+                for (int i = 0;
+                    i < columns;
+                    i++) // формируем строку из элементов внутреннего массива(проходимся по столбцам)
+                {
+                    result[j, i] = matrix[j, i] * number; //заполняем новый массив
+                }
+            }
+
+            return result;
+        }
+
+        //Создаем метод, принимающий 2 матрицы, а возвращающий их сумму
+        static int[,] Addition(int[,] matrix, int[,] matrixTwo)
+        {
+            var rows = matrix.GetLength(0);
+            var columns = matrix.GetLength(1);
+            int[,] matrixAddition = new int[rows, columns];
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < columns; j++)
+                {
+                    matrixAddition[j, i] = matrix[j, i] + matrixTwo[j, i]; //заполняем новый массив
+                }
+            }
+            return matrixAddition;
+        }
+    
+        //Создаем метод, принимающий 2 матрицы, а возвращающий их произведение
+        static int[,] СompositionTwo(int[,] matrix, int[,] matrixTwo)
+        {
+            int[,] matrix1 =
+            {
+                { 1, 2, 3 }
+            }; //задаем первую матрицу
+
+            int[,] matrix2 =
+            {
+                { 4 },
+                { 5 },
+                { 6 }
+            }; //задаем вторую матрицу
+
+            var rowsCount = matrix1.GetLength(0); //вводим переменную количество строк в первом массиве
+            var columnsCount = matrix2.GetLength(1); //вводим переменную количество столбцов во втором массиве
+
+            int[,] resultMatrix = new int[rowsCount, columnsCount]; //создаем третий массив результат 
+            for (int i = 0; i < rowsCount; i++) //проходится по строкам первого массива
+            {
+                for (int j = 0; j < columnsCount; j++) //проходимся по столбцам второго массива
+                {
+                    int sum = 0; //получаем каждый элемент новой матрицы результат
+                    for (int k = 0; k < matrix1.GetLength(1); k++) //для прохождения по всем элементам строки или столбца
+                    {
+                        sum = (matrix1[i, k] * matrix2[k, j]) + sum;
+                    }
+                    resultMatrix[i, j] = sum; //записываем новую матрицу из полученных элементов суммы
+                }
+            }
+            return resultMatrix;
+        }
+    }   
 }
